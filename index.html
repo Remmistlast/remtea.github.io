@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Remmist Study</title>
+<style>
+:root{--bg:#050b17;--c:#0b1a2e;--c2:#10233b;--b:#1b3a5c;--t:#e8f4ff;--m:#8fb0cc;--a:#22d3ee;--bl:#3b82f6;--ok:#34d399;--er:#f87171}
+*{box-sizing:border-box}html,body{margin:0;max-width:100%;overflow-x:hidden}
+body{background:radial-gradient(circle at 20% 0,#0a2540,var(--bg) 55%);color:var(--t);font:15px/1.5 system-ui,"Segoe UI",Roboto,sans-serif;min-height:100vh}
+button,input,select,textarea{font:inherit;color:var(--t)}
+input,select,textarea{background:var(--bg);border:1px solid var(--b);border-radius:10px;padding:9px 11px;width:100%;min-width:0}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--a);outline-offset:1px}
+button{background:var(--c2);border:1px solid var(--b);border-radius:10px;padding:9px 14px;cursor:pointer;transition:.15s}
+button:hover{border-color:var(--a);transform:translateY(-1px)}button:active{transform:none}button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.pri{background:linear-gradient(135deg,var(--bl),var(--a));border:0;color:#02131f;font-weight:700}
+.dg{color:var(--er)}.sm{padding:5px 10px;font-size:13px}
+#intro{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 30%,#0b3558,var(--bg) 70%)}
+#intro h1{font-size:clamp(32px,8vw,64px);letter-spacing:.12em;margin:0;background:linear-gradient(90deg,var(--bl),var(--a));-webkit-background-clip:text;background-clip:text;color:transparent}
+#intro small{letter-spacing:.4em;color:var(--a)}#intro h2{max-width:640px;font-weight:600}#intro p{max-width:520px;color:var(--m)}
+#app{display:none;min-height:100vh}
+aside{position:fixed;left:0;top:0;bottom:0;width:230px;background:var(--c);border-right:1px solid var(--b);padding:70px 12px 12px;transition:transform .25s;z-index:20}
+aside button{display:block;width:100%;text-align:left;margin-bottom:6px;background:none;border-color:transparent}
+aside button.on{background:var(--c2);border-color:var(--a);color:var(--a);font-weight:700}
+header{position:fixed;top:0;left:0;right:0;height:56px;background:var(--c);border-bottom:1px solid var(--b);display:flex;align-items:center;gap:12px;padding:0 14px;z-index:30}
+main{margin-left:230px;padding:76px 20px 30px;transition:margin .25s;max-width:1100px}
+body.col aside{transform:translateX(-100%)}body.col main{margin-left:0}
+@media(max-width:800px){main{margin-left:0;padding:76px 12px 30px}aside{transform:translateX(-100%)}body.col aside{transform:none}}
+.card{background:var(--c);border:1px solid var(--b);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 4px 18px #0006}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}.f{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.num{font-size:30px;font-weight:800;color:var(--a)}h3{margin:0 0 8px}.m{color:var(--m)}
+.sub{cursor:pointer}.sub:hover{border-color:var(--a)}
+.bar{height:10px;background:var(--bg);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--bl),var(--a));transition:width .3s}
+.tk{display:flex;gap:10px;align-items:flex-start;padding:10px;border:1px solid var(--b);border-radius:10px;margin-bottom:8px;background:var(--c2)}
+.tk.d .tt{text-decoration:line-through;opacity:.55}.tk input[type=checkbox]{width:22px;height:22px;margin-top:3px}.tt{flex:1;min-width:0;word-break:break-word}
+.tag{font-size:12px;border:1px solid var(--b);border-radius:20px;padding:1px 8px;margin-right:4px;display:inline-block}
+.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:8px}
+#toast{position:fixed;bottom:16px;right:16px;display:flex;flex-direction:column;gap:6px;z-index:90}
+#toast div{background:var(--c2);border:1px solid var(--a);border-radius:10px;padding:10px 14px;max-width:300px}
+.opt{display:block;width:100%;text-align:left;margin-bottom:8px}.opt.sel{border-color:var(--a);background:#0e3a55}
+.opt.ok{border-color:var(--ok)}.opt.bad{border-color:var(--er)}
+#ov{position:fixed;inset:0;background:#000d;z-index:100;display:none;align-items:center;justify-content:center;text-align:center;padding:20px}
+.clock{font-size:clamp(54px,16vw,100px);font-weight:800;font-variant-numeric:tabular-nums;color:var(--a);text-align:center}
+.ch{display:flex;align-items:flex-end;gap:6px;height:100px}.ch div{flex:1;background:linear-gradient(var(--a),var(--bl));border-radius:5px 5px 0 0;min-height:2px;font-size:10px;text-align:center}
+</style></head><body>
+<div id="intro"><small>WELCOME TO MY WEBSITE</small><h1>REMMIST STUDY</h1>
+<h2>Không gian học tập cá nhân: gọn gàng, tập trung và đủ công cụ cho mỗi ngày.</h2>
+<p>Trang web được thiết kế bởi Hà Lâm.</p><p>Quản lý bài tập, lịch học, trắc nghiệm Lịch sử và đồng hồ Pomodoro ngay trên trình duyệt của bạn.</p>
+<button class="pri" style="font-size:18px;padding:14px 30px" onclick="start()">Bắt đầu học tập</button></div>
+<div id="app"><header><button onclick="document.body.classList.toggle('col')" aria-label="Thu gọn hoặc mở thanh bên">☰</button><b style="color:var(--a)">REMMIST STUDY</b> <small class="m">· bản 5 (đã bỏ nút Thoát Focus)</small></header>
+<aside id="nav"></aside><main id="v"></main></div>
+<div id="toast"></div>
+<div id="ov"><div class="card" style="max-width:420px"><h2>⚠️ Bạn đã thoát toàn màn hình</h2><p id="ovt"></p><button class="pri" id="ovb" onclick="reFs()">Quay lại toàn màn hình</button></div></div>
+<script>
+const KEY='remmist_study',VER=1,SUBJ={toan:['Toán','📐'],ly:['Vật lý','⚛️'],hoa:['Hóa học','🧪'],su:['Lịch sử','📜']},DAYS=['Thứ 2','Thứ 3','Thứ 4','Thứ 5','Thứ 6','Thứ 7','Chủ nhật'],PR=['Thấp','Vừa','Cao'];
+const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ymd=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'),uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const sel=(o,v)=>Object.entries(o).map(([k,x])=>`<option value="${k}" ${k==v?'selected':''}>${Array.isArray(x)?x[1]+' '+x[0]:x}</option>`).join('');
+function def(){const t=ymd(new Date()),n=new Date();n.setDate(n.getDate()+2);return{v:VER,tasks:[
+{id:uid(),title:'Làm bài tập đại số',subj:'toan',due:ymd(n),done:false,pri:2,note:'',created:Date.now()},
+{id:uid(),title:'Ôn công thức chuyển động',subj:'ly',due:ymd(n),done:false,pri:1,note:'',created:Date.now()+1},
+{id:uid(),title:'Học bảng tuần hoàn (20 nguyên tố đầu)',subj:'hoa',due:'',done:true,pri:0,note:'',created:Date.now()+2}],
+sched:[{id:uid(),day:0,time:'19:00',subj:'toan',text:'Luyện đề',weekly:true,week:''},{id:uid(),day:2,time:'19:00',subj:'su',text:'Ôn Ấn Độ cổ – trung đại',weekly:true,week:''}],
+profile:{name:'Hà Lâm',goal:'',note:'',gMin:120,gTask:3},pomo:{f:25,s:5,l:15,auto:false,log:{},sessions:0,secs:0},quiz:[]}}
+let S;function load(){try{const r=localStorage.getItem(KEY);if(!r)return def();const d=JSON.parse(r);if(!d||!Array.isArray(d.tasks)||!Array.isArray(d.sched)||!d.profile||!d.pomo)throw 0;return Object.assign(def(),d,{v:VER})}catch(e){setTimeout(()=>toast('⚠️ Dữ liệu lưu bị lỗi, đã dùng dữ liệu mẫu.'),500);return def()}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast('⚠️ Lưu thất bại: trình duyệt chặn hoặc hết bộ nhớ.')}}
+const notes=[];function toast(m){notes.unshift(new Date().toLocaleTimeString('vi')+' — '+m);notes.length=Math.min(notes.length,30);const d=document.createElement('div');d.textContent=m;$('toast').append(d);setTimeout(()=>d.remove(),3200)}
+S=load();let page='home',tf={subj:'',st:'',q:'',sort:'due'},wk=0,edT=null,edS=null,QZ=null;
+const PGS={home:'🏠 Trang chủ',notif:'🔔 Thông báo',tasks:'📝 Bài tập',sched:'🗓️ Lịch học',pomo:'⏱️ Pomodoro',me:'👤 Cá nhân'};
+function start(){$('intro').style.display='none';$('app').style.display='block';go('home')}
+function go(p){if(QZ&&!QZ.done&&p!=='tasks'&&!confirm('Bài trắc nghiệm đang làm dở. Rời đi sẽ mất tiến trình. Tiếp tục?'))return;if(p!=='tasks'){if(QZ)endFocus();QZ=null}page=p;if(innerWidth<=800)document.body.classList.remove('col');
+$('nav').innerHTML=Object.entries(PGS).map(([k,v])=>`<button class="${k==p?'on':''}" ${k==p?'aria-current="page"':''} onclick="go('${k}')">${v}</button>`).join('');render();scrollTo(0,0)}
+function render(){$('v').innerHTML=({home,notif,tasks,sched,pomo,me})[page]();if(page==='pomo')tickUI()}
+const today=()=>ymd(new Date()),mins=()=>Math.round((S.pomo.log[today()]||0)/60);
+function done(){return S.tasks.filter(t=>t.done).length}
+function bar(p){return`<div class="bar" role="progressbar" aria-valuenow="${p}" aria-valuemin="0" aria-valuemax="100"><i style="width:${p}%"></i></div>`}
+function home(){const d=done(),n=S.tasks.length,p=n?Math.round(d/n*100):0,od=S.tasks.filter(t=>!t.done).sort((a,b)=>(a.due||'9')>(b.due||'9')?1:-1).slice(0,5);
+return`<h2>Xin chào, ${esc(S.profile.name)} 👋</h2><div class="g">
+<div class="card"><div class="num">${n-d}</div>Nhiệm vụ còn lại</div><div class="card"><div class="num">${d}</div>Đã hoàn thành</div>
+<div class="card"><div class="num">4</div>Môn học</div><div class="card"><div class="num">${mins()}′</div>Tập trung hôm nay · ${S.pomo.sessions} phiên</div></div>
+<div class="card"><h3>Tiến độ học tập: ${p}%</h3>${bar(p)}</div>
+<h3>Môn học</h3><div class="g">${Object.entries(SUBJ).map(([k,[nm,ic]])=>{const c=S.tasks.filter(t=>t.subj==k&&!t.done).length;return`<div class="card sub" tabindex="0" role="button" onclick="tf.subj='${k}';tf.st='';go('tasks')" onkeydown="if(event.key=='Enter')this.click()"><div style="font-size:28px">${ic}</div><b>${nm}</b><div class="m">${c} nhiệm vụ chưa xong${k=='su'?' · Có trắc nghiệm':''}</div></div>`}).join('')}</div>
+<div class="card"><h3>Nhiệm vụ chưa hoàn thành</h3>${od.length?od.map(t=>`<div>• ${esc(t.title)} <span class="tag">${SUBJ[t.subj][0]}</span><span class="m">${t.due||''}</span></div>`).join(''):'<p class="m">Không còn nhiệm vụ nào. Tuyệt vời! 🎉</p>'}</div>
+<div class="card f"><b>Bắt đầu nhanh:</b><button class="pri" onclick="go('pomo')">⏱️ Pomodoro</button><button onclick="go('sched')">🗓️ Lịch học</button></div>
+<div class="card m">💡 Nhắc nhẹ: học 25 phút, nghỉ 5 phút sẽ giúp giữ sức lâu hơn.</div>`}
+function notif(){return`<div class="card"><h3>Hướng dẫn</h3><p>• Bài tập: thêm/sửa/xóa nhiệm vụ, lọc và sắp xếp.<br>• Lịch học: thêm buổi học theo tuần, có thể chuyển thành nhiệm vụ.<br>• Pomodoro: chọn nhiệm vụ rồi bấm Bắt đầu; Focus Mode dùng toàn màn hình.</p></div>
+<div class="card"><h3>Lưu dữ liệu</h3><p>Dữ liệu lưu trong trình duyệt này (localStorage), <b>không tự đồng bộ giữa các thiết bị</b>. Hãy xuất file JSON ở trang Cá nhân để sao lưu.</p></div>
+<div class="card"><h3>Hoạt động gần đây</h3>${notes.length?notes.map(n=>`<div>${esc(n)}</div>`).join(''):'<p class="m">Chưa có hoạt động nào trong phiên này.</p>'}</div>`}
+function tasks(){if(QZ)return quiz();let l=S.tasks.filter(t=>(!tf.subj||t.subj==tf.subj)&&(!tf.st||(tf.st=='done')==t.done)&&t.title.toLowerCase().includes(tf.q.toLowerCase()));
+l.sort((a,b)=>tf.sort=='pri'?b.pri-a.pri:tf.sort=='new'?b.created-a.created:(a.due||'9')>(b.due||'9')?1:-1);const e=edT&&S.tasks.find(t=>t.id==edT)||{};
+return`<h2>Bài tập</h2><div class="card"><h3>${e.id?'Sửa':'Thêm'} nhiệm vụ</h3><form onsubmit="return saveT(event)"><div class="row2"><input id="t1" placeholder="Tên nhiệm vụ" required value="${esc(e.title)}"><select id="t2">${sel(SUBJ,e.subj)}</select><input id="t3" type="date" value="${e.due||''}"><select id="t4">${sel(PR,e.pri??1)}</select></div><textarea id="t5" rows="2" placeholder="Ghi chú (tùy chọn)">${esc(e.note)}</textarea><div class="f" style="margin-top:8px"><button class="pri">${e.id?'Lưu':'Thêm'}</button>${e.id?'<button type="button" onclick="edT=null;render()">Hủy</button>':''}</div></form></div>
+<div class="card"><div class="row2"><input placeholder="🔍 Tìm theo tên" value="${esc(tf.q)}" oninput="tf.q=this.value;rl()"><select onchange="tf.subj=this.value;render()"><option value="">Tất cả môn</option>${sel(SUBJ,tf.subj)}</select><select onchange="tf.st=this.value;render()"><option value="">Mọi trạng thái</option><option value="todo" ${tf.st=='todo'?'selected':''}>Chưa xong</option><option value="done" ${tf.st=='done'?'selected':''}>Đã xong</option></select><select onchange="tf.sort=this.value;render()"><option value="due">Sắp xếp: hạn</option><option value="pri" ${tf.sort=='pri'?'selected':''}>Ưu tiên</option><option value="new" ${tf.sort=='new'?'selected':''}>Mới tạo</option></select></div><div id="tl">${tl(l)}</div></div>
+<div class="card"><h3>📜 Trắc nghiệm Lịch sử: Tư tưởng tôn giáo Ấn Độ cổ – trung đại</h3><p class="m">${BANK.length} câu · Toán, Vật lý, Hóa học chưa có ngân hàng câu hỏi.</p><button class="pri" onclick="qStart()">Làm bài</button>
+${S.quiz.length?'<h4>Lịch sử kết quả</h4>'+S.quiz.slice(-5).reverse().map(r=>`<div>${r.date}: ${r.ok}/${r.n} đúng · ${r.score} điểm</div>`).join('')+wrong():''}</div>`}
+function wrong(){const w={};S.quiz.forEach(r=>(r.wrong||[]).forEach(t=>w[t]=(w[t]||0)+1));const k=Object.entries(w).sort((a,b)=>b[1]-a[1]);return k.length?'<h4>Chủ đề hay sai</h4>'+k.map(([t,c])=>`<div>• ${esc(t)}: ${c} lần</div>`).join(''):''}
+function rl(){const q=tf.q.toLowerCase();$('tl').innerHTML=tl(S.tasks.filter(t=>(!tf.subj||t.subj==tf.subj)&&(!tf.st||(tf.st=='done')==t.done)&&t.title.toLowerCase().includes(q)))}
+function tl(l){return l.length?l.map(t=>`<div class="tk ${t.done?'d':''}"><input type="checkbox" aria-label="Hoàn thành" ${t.done?'checked':''} onchange="tog('${t.id}')"><div class="tt"><b>${esc(t.title)}</b><br><span class="tag">${SUBJ[t.subj][1]} ${SUBJ[t.subj][0]}</span><span class="tag">Ưu tiên ${PR[t.pri]}</span><span class="m">${t.due?'Hạn '+t.due:''}</span>${t.note?'<br><span class="m">'+esc(t.note)+'</span>':''}</div><button class="sm" onclick="edT='${t.id}';render();scrollTo(0,0)">Sửa</button><button class="sm dg" onclick="delT('${t.id}')">Xóa</button></div>`).join(''):'<p class="m">Chưa có nhiệm vụ nào phù hợp. Hãy thêm nhiệm vụ mới ở trên.</p>'}
+function saveT(ev){ev.preventDefault();const o={title:$('t1').value.trim(),subj:$('t2').value,due:$('t3').value,pri:+$('t4').value,note:$('t5').value};if(!o.title)return false;
+if(edT){Object.assign(S.tasks.find(t=>t.id==edT),o);toast('Đã cập nhật nhiệm vụ');edT=null}else{S.tasks.push({id:uid(),done:false,created:Date.now(),...o});toast('Đã thêm nhiệm vụ')}save();render();return false}
+function tog(id){const t=S.tasks.find(t=>t.id==id);t.done=!t.done;if(t.done)toast('Hoàn thành: '+t.title);save();render()}
+function delT(id){if(confirm('Xóa nhiệm vụ này?')){S.tasks=S.tasks.filter(t=>t.id!=id);save();toast('Đã xóa nhiệm vụ');render()}}
+const BANK=[{subj:'su',topic:'Phật giáo',lv:1,q:'Phật giáo được sáng lập bởi ai?',o:['Khổng Tử','Thích-ca Mâu-ni','Mahavira','Ashoka'],a:1,ex:'Phật giáo do Siddhartha Gautama (Thích-ca Mâu-ni) sáng lập ở Bắc Ấn khoảng thế kỷ VI TCN.'},
+{subj:'su',topic:'Kinh Veda',lv:1,q:'Bộ kinh cổ nào có ảnh hưởng quan trọng đến truyền thống tôn giáo Ấn Độ?',o:['Kinh Veda','Luận Ngữ','Kinh Dịch','Kinh Qur’an'],a:0,ex:'Kinh Veda là tập thánh thư cổ nhất, nền tảng của Bà-la-môn giáo và Ấn Độ giáo. Luận Ngữ, Kinh Dịch thuộc Trung Quốc; Qur’an thuộc Hồi giáo.'},
+{subj:'su',topic:'Kỳ Na giáo',lv:2,q:'Mahavira là người có vai trò gì?',o:['Vị vua thống nhất Ấn Độ','Người truyền bá Kỳ Na giáo','Tác giả kinh Veda','Người sáng lập đạo Sikh'],a:1,ex:'Mahavira là vị thầy lớn của Kỳ Na giáo (Jainism), nhấn mạnh tu hành khổ hạnh và không bạo lực.'},
+{subj:'su',topic:'Tứ diệu đế',lv:2,q:'“Tứ diệu đế” của Phật giáo gồm bốn chân lý nào?',o:['Khổ, Tập, Diệt, Đạo','Nhân, Lễ, Nghĩa, Trí','Sinh, Lão, Bệnh, Tử','Tín, Hy, Vọng, Ái'],a:0,ex:'Tứ diệu đế gồm Khổ đế, Tập đế (nguyên nhân), Diệt đế (chấm dứt khổ) và Đạo đế (con đường diệt khổ).'},
+{subj:'su',topic:'Ahimsa',lv:2,q:'Nguyên tắc “ahimsa” trong tư tưởng tôn giáo Ấn Độ có nghĩa là gì?',o:['Thờ nhiều thần','Không làm tổn hại sinh vật','Bố thí tài sản','Tuân theo vua chúa'],a:1,ex:'Ahimsa là bất bạo động, không làm hại sinh vật; đặc biệt được đề cao trong Kỳ Na giáo và Phật giáo.'}];
+const sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+function qStart(){enterFocus();QZ={qs:sh(BANK).map(q=>{const o=sh(q.o.map((t,i)=>({t,c:i==q.a})));return{...q,o}}),ans:[],i:0,done:false,t0:Date.now()};render()}
+function quiz(){const z=QZ,n=z.qs.length;if(z.done){const ok=z.qs.filter((q,i)=>(q.o[z.ans[i]]||{}).c).length;return`<h2>Kết quả</h2><div class="card"><div class="num">${(ok/n*10).toFixed(1)}/10</div>Đúng ${ok} · Sai ${n-ok}<br>Số lần thoát màn hình: ${z.viol||0}${z.forced?' — bài bị tự động nộp do vi phạm quá 3 lần':''}</div>${z.qs.map((q,i)=>`<div class="card"><b>Câu ${i+1}. ${esc(q.q)}</b><br>${q.o.map((o,j)=>`<div class="opt ${o.c?'ok':j==z.ans[i]?'bad':''}">${'ABCD'[j]}. ${esc(o.t)} ${o.c?'✔ Đáp án đúng':j==z.ans[i]?'✘ Bạn chọn':''}</div>`).join('')}<p class="m">${esc(q.ex)}</p></div>`).join('')}<button class="pri" onclick="qStart()">Làm lại bài</button> <button onclick="endFocus();QZ=null;render()">Quay về bài tập</button>`}
+const q=z.qs[z.i];return`<h2>Trắc nghiệm Lịch sử</h2><div class="card"><b>Câu ${z.i+1}/${n}</b> <span class="m">· Nhắc nhở: ${z.viol||0}/3 (đủ 3 lần bài tự động nộp)</span>${bar((z.i+1)/n*100)}<h3 style="margin-top:12px">${esc(q.q)}</h3>${q.o.map((o,j)=>`<button class="opt ${z.ans[z.i]===j?'sel':''}" onclick="QZ.ans[QZ.i]=${j};render()">${'ABCD'[j]}. ${esc(o.t)} ${z.ans[z.i]===j?'●':''}</button>`).join('')}
+<div class="f"><button ${z.i?'':'disabled'} onclick="QZ.i--;render()">← Câu trước</button><button ${z.i<n-1?'':'disabled'} onclick="QZ.i++;render()">Câu tiếp →</button><button class="pri" onclick="qSubmit()">Nộp bài</button></div></div>`}
+function qSubmit(){const z=QZ,m=z.qs.map((q,i)=>z.ans[i]===undefined?i+1:0).filter(Boolean);if(m.length)return toast('Bạn chưa trả lời câu: '+m.join(', '));qFinish(false)}
+function qFinish(forced){const z=QZ,ok=z.qs.filter((q,i)=>(q.o[z.ans[i]]||{}).c).length;z.done=true;z.forced=forced;endFocus();
+S.quiz.push({date:new Date().toLocaleString('vi'),n:z.qs.length,ok,score:+(ok/z.qs.length*10).toFixed(1),secs:Math.round((Date.now()-z.t0)/1000),viol:z.viol||0,wrong:z.qs.filter((q,i)=>!(q.o[z.ans[i]]||{}).c).map(q=>q.topic)});save();toast(forced?'⚠️ Thoát màn hình quá 3 lần: bài đã bị tự động nộp':'Đã nộp bài');render()}
+addEventListener('beforeunload',e=>{if(QZ&&!QZ.done){e.preventDefault();e.returnValue=''}});
+function wkDate(i){const d=new Date();d.setDate(d.getDate()-((d.getDay()+6)%7)+7*wk+i);return d}
+function sched(){const mon=ymd(wkDate(0)),e=edS&&S.sched.find(s=>s.id==edS)||{},td=today(),up=S.sched.length;
+return`<h2>Lịch học</h2><div class="card"><form onsubmit="return saveS(event)"><div class="row2"><select id="s1">${sel(DAYS,e.day??0)}</select><input id="s2" type="time" required value="${e.time||'19:00'}"><select id="s3">${sel(SUBJ,e.subj)}</select><input id="s4" placeholder="Nội dung" required value="${esc(e.text)}"></div><label><input type="checkbox" id="s5" style="width:auto" ${e.weekly!==false?'checked':''}> Lặp hằng tuần</label><div class="f" style="margin-top:8px"><button class="pri">${e.id?'Lưu':'Thêm lịch'}</button>${e.id?'<button type="button" onclick="edS=null;render()">Hủy</button>':''}</div></form></div>
+<div class="f" style="margin-bottom:10px"><button onclick="wk--;render()">← Tuần trước</button><b>${ymd(wkDate(0))} → ${ymd(wkDate(6))}</b><button onclick="wk++;render()">Tuần sau →</button><button onclick="wk=0;render()">Tuần này</button></div>
+${DAYS.map((n,i)=>{const dt=ymd(wkDate(i)),l=S.sched.filter(s=>s.day==i&&(s.weekly||s.week==mon)).sort((a,b)=>a.time>b.time?1:-1);return`<div class="card" style="${dt==td?'border-color:var(--a)':''}"><b>${n} · ${dt}</b> ${dt==td?'<span class="tag">Hôm nay</span>':''}${l.length?l.map(s=>`<div class="tk"><div class="tt"><b>${s.time}</b> ${SUBJ[s.subj][1]} ${SUBJ[s.subj][0]}: ${esc(s.text)} ${s.weekly?'<span class="tag">Hằng tuần</span>':''}</div><button class="sm" onclick="s2t('${s.id}',${i})">→ Nhiệm vụ</button><button class="sm" onclick="edS='${s.id}';render();scrollTo(0,0)">Sửa</button><button class="sm dg" onclick="delS('${s.id}')">Xóa</button></div>`).join(''):'<div class="m">Trống</div>'}</div>`}).join('')}`}
+function saveS(ev){ev.preventDefault();const o={day:+$('s1').value,time:$('s2').value,subj:$('s3').value,text:$('s4').value.trim(),weekly:$('s5').checked,week:ymd(wkDate(0))};
+const c=S.sched.find(s=>s.id!=edS&&s.day==o.day&&s.time==o.time&&(s.weekly||o.weekly||s.week==o.week));if(c)toast('⚠️ Trùng giờ với: '+c.text);
+if(edS)Object.assign(S.sched.find(s=>s.id==edS),o);else S.sched.push({id:uid(),...o});edS=null;save();toast('Đã lưu lịch học');render();return false}
+function delS(id){if(confirm('Xóa lịch học này?')){S.sched=S.sched.filter(s=>s.id!=id);save();render()}}
+function s2t(id,i){const s=S.sched.find(x=>x.id==id);S.tasks.push({id:uid(),title:s.text,subj:s.subj,due:ymd(wkDate(i)),done:false,pri:1,note:'Từ lịch học '+s.time,created:Date.now()});save();toast('Đã tạo nhiệm vụ từ buổi học')}
+let P={mode:'f',left:null,run:false,end:0,id:null,task:'',focus:false,ov:null};const MN={f:'Tập trung',s:'Nghỉ ngắn',l:'Nghỉ dài'},dur=m=>S.pomo[m]*60;
+function pomo(){if(P.left===null)P.left=dur(P.mode);const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return[d.getDate(),Math.round((S.pomo.log[ymd(d)]||0)/60)]}),mx=Math.max(1,...days.map(d=>d[1]));
+return`<h2>Pomodoro</h2><div class="card"><div class="f" style="justify-content:center">${Object.entries(MN).map(([k,v])=>`<button class="${P.mode==k?'pri':''}" onclick="setM('${k}')">${v}</button>`).join('')}</div><div class="clock" id="clk"></div>
+<div class="f" style="justify-content:center"><button class="pri" id="pb" onclick="pToggle()"></button><button onclick="pReset()">Đặt lại</button><button onclick="startFocus()">⛶ Bật Focus Mode</button><button onclick="endFocus()">Tắt Focus Mode</button></div>
+<div style="margin-top:12px"><select onchange="P.task=this.value"><option value="">— Không gắn nhiệm vụ —</option>${S.tasks.filter(t=>!t.done).map(t=>`<option value="${t.id}" ${P.task==t.id?'selected':''}>${esc(t.title)}</option>`).join('')}</select></div></div>
+<div class="card"><h3>Cài đặt (phút)</h3><div class="row2"><label>Tập trung<input type="number" min="1" max="180" value="${S.pomo.f}" onchange="cfg('f',this.value)"></label><label>Nghỉ ngắn<input type="number" min="1" max="60" value="${S.pomo.s}" onchange="cfg('s',this.value)"></label><label>Nghỉ dài<input type="number" min="1" max="90" value="${S.pomo.l}" onchange="cfg('l',this.value)"></label></div><label><input type="checkbox" style="width:auto" ${S.pomo.auto?'checked':''} onchange="S.pomo.auto=this.checked;save()"> Tự chuyển sang nghỉ sau phiên tập trung</label></div>
+<div class="card"><h3>Hôm nay: ${S.pomo.sessions} phiên tổng · ${mins()} phút</h3><p class="m">Phút tập trung 7 ngày gần nhất</p><div class="ch">${days.map(d=>`<div style="height:${d[1]/mx*100}%">${d[1]}<br>${d[0]}</div>`).join('')}</div></div>`}
+function cfg(k,v){v=Math.max(1,Math.min(180,+v||25));S.pomo[k]=v;if(P.mode==k&&!P.run)P.left=dur(k);save();render()}
+function setM(m){stop();P.mode=m;P.left=dur(m);render()}
+function stop(){if(P.id){clearInterval(P.id);P.id=null}P.run=false}
+function pToggle(){if(P.run){P.left=Math.max(0,Math.round((P.end-Date.now())/1000));stop()}else{stop();P.run=true;P.end=Date.now()+P.left*1000;P.id=setInterval(tick,250)}tickUI()}
+function pReset(){stop();P.left=dur(P.mode);tickUI()}
+function tick(){const l=Math.max(0,Math.round((P.end-Date.now())/1000));P.left=l;tickUI();if(l<=0)finish()}
+function tickUI(){const c=$('clk');if(!c)return;const l=P.run?Math.max(0,Math.round((P.end-Date.now())/1000)):P.left;c.textContent=String(l/60|0).padStart(2,'0')+':'+String(l%60).padStart(2,'0');$('pb').textContent=P.run?'⏸ Tạm dừng':'▶ Bắt đầu';document.title=(P.run?c.textContent+' · ':'')+'Remmist Study'}
+function finish(){const m=P.mode;stop();if(m=='f'){const d=today();S.pomo.log[d]=(S.pomo.log[d]||0)+dur('f');S.pomo.sessions++;save();toast('🎉 Hết giờ tập trung! Nghỉ chút nhé.');if(P.task){const t=S.tasks.find(x=>x.id==P.task);if(t)t.note=(t.note?t.note+' ':'')+'🍅'}}else toast('⏰ Hết giờ nghỉ!');
+try{new AudioContext().resume()}catch(e){}P.mode=m=='f'?(S.pomo.auto?(S.pomo.sessions%4==0?'l':'s'):'f'):'f';P.left=dur(P.mode);render();if(m=='f'&&S.pomo.auto)pToggle()}
+let VC=0;
+function enterFocus(){if(!document.documentElement.requestFullscreen)return toast('Trình duyệt không hỗ trợ toàn màn hình.');document.documentElement.requestFullscreen().then(()=>{P.focus=true;try{navigator.keyboard&&navigator.keyboard.lock(['Escape','F11']).catch(()=>{})}catch(e){}}).catch(()=>toast('Trình duyệt chặn toàn màn hình.'));P.focus=true}
+function startFocus(){enterFocus();toast('Focus Mode đã bật')}
+function hideOv(){$('ov').style.display='none';P.warn=false;P.ready=false}
+function reFs(){document.documentElement.requestFullscreen().then(hideOv).catch(()=>toast('Không thể bật toàn màn hình.'))}
+function endFocus(){P.focus=false;VC=0;clearTimeout(P.ov);hideOv();if(document.fullscreenElement)document.exitFullscreen()}
+function warn(){if(!P.focus||P.warn)return;P.warn=true;VC++;if(QZ&&!QZ.done){QZ.viol=(QZ.viol||0)+1;if(QZ.viol>=3){P.warn=false;qFinish(true);return}}P.ov=setTimeout(showOv,1000)}
+function showOv(){$('ov').style.display='flex';$('ovb').disabled=true;P.ready=false;document.documentElement.requestFullscreen().catch(()=>{});let n=4;const f=()=>{$('ovt').textContent='Bạn đã thoát màn hình và đã bị nhắc nhở (lần '+VC+'). Không thể thao tác trong '+n+' giây…'};f();
+const iv=setInterval(()=>{if(!P.focus){clearInterval(iv);return}n--;if(n>0)return f();clearInterval(iv);if(document.fullscreenElement)hideOv();else{$('ovt').textContent='Hết 4 giây. Bấm nút hoặc nhấn phím bất kỳ để vào lại toàn màn hình.';$('ovb').disabled=false;P.ready=true}},1000)}
+document.addEventListener('fullscreenchange',()=>{if(document.fullscreenElement){if(P.ready)hideOv()}else warn()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)warn()});addEventListener('blur',warn);
+addEventListener('keydown',e=>{if(P.focus&&e.key==='F11')e.preventDefault();if(P.ready&&!['Escape','Alt','Control','Shift','Meta','F11'].includes(e.key))reFs()});$('ov').addEventListener('click',e=>{if(P.ready)reFs()});
+function me(){const p=S.profile,t=S.tasks.length,d=done(),dm=mins(),tm=Math.round(Object.values(S.pomo.log).reduce((a,b)=>a+b,0)/60);
+return`<h2>Cá nhân</h2><div class="card"><div class="row2"><label>Tên hiển thị<input id="p1" value="${esc(p.name)}"></label><label>Phút tập trung/ngày<input id="p4" type="number" min="0" value="${p.gMin}"></label><label>Nhiệm vụ/ngày<input id="p5" type="number" min="0" value="${p.gTask}"></label></div><label>Mục tiêu học tập<textarea id="p2" rows="2">${esc(p.goal)}</textarea></label><label>Ghi chú cá nhân<textarea id="p3" rows="3">${esc(p.note)}</textarea></label><button class="pri" style="margin-top:8px" onclick="saveP()">Lưu</button></div>
+<div class="card"><h3>Thống kê</h3><p>Nhiệm vụ: ${d}/${t} xong · Phiên Pomodoro: ${S.pomo.sessions} · Tổng tập trung: ${tm} phút</p>Mục tiêu phút hôm nay: ${dm}/${p.gMin}${bar(p.gMin?Math.min(100,dm/p.gMin*100|0):0)}</div>
+<div class="card"><h3>Dữ liệu</h3><p class="m">Lưu trong trình duyệt này, không đồng bộ giữa các thiết bị.</p><div class="f"><button onclick="exp()">⬇ Xuất JSON</button><button onclick="$('imp').click()">⬆ Nhập JSON</button><button class="dg" onclick="reset()">Khôi phục dữ liệu mẫu</button></div><input id="imp" type="file" accept=".json" hidden onchange="imp(this.files[0])"></div>`}
+function saveP(){Object.assign(S.profile,{name:$('p1').value.trim()||'Hà Lâm',goal:$('p2').value,note:$('p3').value,gMin:+$('p4').value||0,gTask:+$('p5').value||0});save();toast('Đã lưu thông tin cá nhân')}
+function exp(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,1)],{type:'application/json'}));a.download='remmist-study-backup.json';a.click();toast('Đã xuất dữ liệu')}
+function imp(f){if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d.tasks)||!Array.isArray(d.sched)||!d.profile||!d.pomo)throw 0;if(!confirm('Nhập sẽ ghi đè dữ liệu hiện tại. Tiếp tục?'))return;S=Object.assign(def(),d,{v:VER});save();toast('Nhập dữ liệu thành công');render()}catch(e){toast('⚠️ File JSON không hợp lệ.')}};r.readAsText(f)}
+function reset(){if(confirm('Khôi phục dữ liệu mẫu sẽ XÓA toàn bộ dữ liệu hiện tại. Tiếp tục?')){S=def();save();stop();P.left=null;toast('Đã khôi phục dữ liệu mẫu');render()}}
+</script></body></html>
